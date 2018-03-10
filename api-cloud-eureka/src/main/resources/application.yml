@@ -1,0 +1,40 @@
+server:
+  port: 8443
+# Defines the Eureka server that is used by the Netflix OSS components to use as the registry
+# for server discovery
+eureka:
+  server:
+    peerNodeConnectTimeoutMs: 30000
+    peerNodeReadTimeoutMs: 30000
+    renewalPercentThreshold: 0.6
+    username: ${eurekaServerUsername}
+    password: ${eurekaServerPassword}
+#  instance:
+#    securePort: ${server.port}
+#    hostname: ${rootUrl}
+#    homePageUrl: ${rootUrl}:${server.port}
+#    statusPageUrl: ${rootUrl}:${server.port}/info
+#    healthCheckUrl: ${rootUrl}:${server.port}/health
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: ${defaultZone}
+    healthcheck:
+      enabled: true
+
+security:
+  basic:
+    enabled: true
+  user:
+    name: ${eurekaServerUsername}
+    password: ${eurekaServerPassword}
+
+spring:
+  application:
+    name: api-cloud-eureka
+  jmx:
+    default-domain: ${spring.application.name}
+
+logging:
+  config: classpath:logback.xml
