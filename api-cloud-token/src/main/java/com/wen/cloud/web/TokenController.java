@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 
-public class TestController {
+public class TokenController {
     @Autowired
     TokenService tokenService;
     @PostMapping("/login")
     public DataResponse<String> login(String userName, String password){
         return    tokenService.login(userName,password);
     }
-    @PostMapping("/check")
+    @PostMapping("/checkToken")
     public DataResponse<String> check(String token){
         DataResponse<String> response= new DataResponse<>();
         response.setStatusCode(IConstants.RESPONSE_STATUS_CODE_FAILED);
@@ -29,5 +29,4 @@ public class TestController {
         }
         return   response;
     }
-
 }

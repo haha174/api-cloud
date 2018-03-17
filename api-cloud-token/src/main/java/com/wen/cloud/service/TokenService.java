@@ -31,11 +31,11 @@ public class TokenService {
 
         String pass=(String)redis.get(username);
         if(StringUtils.isNotBlank(pass)&&pass.equals(password)){
-            logger.info("login success"+username);
             Map map=new HashMap<>();
             map.put("id",1);
             String token= JavaWebToken.createJavaWebToken(map);
             redis.set(token,token);
+            logger.info("login success"+username);
             response.setValue(token);
         }else{
             logger.info("login error");
